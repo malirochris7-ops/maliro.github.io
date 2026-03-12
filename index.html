@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Étudiant UPL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --gold: #d4af37;
+            --dark: #1a1a1a;
+            --light: #f4f4f4;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at center, #2c2c2c 0%, #000 100%);
+            color: white;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+
+        /* Section Image */
+        .image-section {
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .mirror-frame {
+            position: relative;
+            border: 8px solid var(--gold);
+            border-image: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728) 1;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .mirror-frame:hover {
+            transform: rotate(-2deg) scale(1.05);
+        }
+
+        .mirror-frame img {
+            width: 100%;
+            max-width: 300px;
+            display: block;
+            filter: grayscale(20%) contrast(1.1);
+        }
+
+        /* Section Contenu */
+        .content-section {
+            padding: 60px;
+            overflow-y: auto;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .subtitle {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.8rem;
+            color: #aaa;
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--gold);
+            display: inline-block;
+        }
+
+        p {
+            margin-bottom: 25px;
+            color: #ccc;
+            font-weight: 300;
+        }
+
+        .skills-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .skills-list li {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--gold);
+        }
+
+        /* Bouton Contact */
+        .btn-contact-trigger {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--gold);
+            color: black;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .btn-contact-trigger:hover {
+            background: #fcf6ba;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Formulaire Amélioré */
+        .form-container {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.8s ease;
+            margin-top: 20px;
+        }
+
+        .form-container:target {
+            max-height: 800px;
+            opacity: 1;
+            margin-top: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--gold);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 12px;
+            color: white;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--gold);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: var(--gold);
+            color: black;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            .content-section {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="image-section">
+            <div class="mirror-frame">
+                <img src="a658a2ced09b31607783a59f3dd859a3.jpg" alt="Portrait Étudiant">
+            </div>
+        </div>
+
+        <div class="content-section">
+            <header>
+                <h1>Je suis <span class="highlight">Étudiant</span></h1>
+                <span class="subtitle">Université Protestante de Lubumbashi</span>
+            </header>
+
+            <main>
+                <section>
+                    <h2>À propos</h2>
+                    <p>
+                        Passionné par l'architecture logicielle et la culture manga, je prépare actuellement mon 
+                        <strong>Baccalauréat technique</strong> au Congo. Je forge mon parcours entre rigueur académique 
+                        et créativité numérique.
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Expertise</h2>
+                    <ul class="skills-list">
+                        <li>HTML5 / CSS3</li>
+                        <li>Maintenance Système</li>
+                        <li>Gestion de Projet</li>
+                        <li>Analyse Technique</li>
+                    </ul>
+                </section>
+
+                <a href="#contact-form" class="btn-contact-trigger">Travailler ensemble</a>
+
+                <div id="contact-form" class="form-container">
+                    <form action="#">
+                        <div class="form-group">
+                            <label>Nom complet</label>
+                            <input type="text" placeholder="Ex: Jean Mukendi" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Votre E-mail</label>
+                            <input type="email" placeholder="nom@exemple.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea rows="4" placeholder="Décrivez votre projet..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Envoyer la proposition</button>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+
+</body>
+</html>
